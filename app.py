@@ -2,12 +2,12 @@ import os
 from flask import Flask, request, redirect
 import twilio.twiml
 from twilio import twiml
-from twilio.rest import Client
+# from twilio.rest import Client
 
 app = Flask(__name__)
 app.config.from_pyfile('local_settings.py')
 
-client = Client(app.config['TWILIO_ACCOUNT_SID'], app.config['TWILIO_AUTH_TOKEN'])
+# client = Client(app.config['TWILIO_ACCOUNT_SID'], app.config['TWILIO_AUTH_TOKEN'])
 
 @app.route("/", methods=['GET', 'POST'])
 def receiveAndRespond():
@@ -26,7 +26,7 @@ def receiveAndRespond():
 	else:
 		body = "Invalid command. Text 'help' for commands"
 
-	resp = twilio.twiml.Response()
+	resp = twiml.Response()
 	resp.message(body)
 	return str(resp)
 	
