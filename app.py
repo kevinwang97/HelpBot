@@ -21,7 +21,7 @@ def receiveAndRespond():
 		-----------------------------------
 		weather | get the current weather
 		"""
-	else if request_body.lower() == 'weather':
+	elif request_body.lower() == 'weather':
 		body = "It is currently -1 degrees"
 	else:
 		body = "Invalid command. Text 'help' for commands"
