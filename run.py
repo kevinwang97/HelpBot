@@ -1,10 +1,14 @@
 import os
-from flask import Flask
+from flask import Flask, request, redirect
+import twilio.twiml
+
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def hello():
-	return "Hello World!"
+	resp = twilio.twiml.Response()
+	resp.message("Hello!")
+	return str(resp)
 	
 if __name__ == "__main__":
 	port = int(os.getenv('PORT', 5000))
