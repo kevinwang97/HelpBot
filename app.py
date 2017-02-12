@@ -5,7 +5,7 @@ from twilio import twiml
 # from twilio.rest import Client
 
 app = Flask(__name__)
-app.config.from_pyfile('local_settings.py')
+# app.config.from_pyfile('local_settings.py')
 
 # client = Client(app.config['TWILIO_ACCOUNT_SID'], app.config['TWILIO_AUTH_TOKEN'])
 
