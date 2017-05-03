@@ -1,0 +1,2 @@
+weather_key=5acf955487fe5fefc38b92fe92ec95d0
+google_maps_api_key=AIzaSyBbsUrbv6Kw4aG4IvwdbU4hUKPm-UEsAWU

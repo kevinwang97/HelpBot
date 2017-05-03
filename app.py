@@ -7,24 +7,24 @@ from twilio import twiml
 app = Flask(__name__)
 # app.config.from_pyfile('local_settings.py')
 
-# client = Client(app.config['TWILIO_ACCOUNT_SID'], app.config['TWILIO_AUTH_TOKEN'])
-
 @app.route("/", methods=['GET', 'POST'])
 def receiveAndRespond():
 	sender = request.values.get('From')
 	request_body = request.values.get('Body')
 	# put NLP here
-	
-	if request_body.lower() == 'help':
+
+	if request_body == None:
+        return "No request"
+
+	if request_body.lower() == 'commands':
 		body = """
-		command | description
-		-----------------------------------
-		weather | get the current weather
+		To get directions:
+		directions <source> <destination> <method> <when>
 		"""
-	elif request_body.lower() == 'weather':
-		body = "It is currently -1 degrees"
+    elif request_body.lower() == 'directions':
+        body = "blah"
 	else:
-		body = "Invalid command. Text 'help' for commands"
+		body = "Invalid command. Text 'commands' for list of all commands"
 
 	resp = twiml.Response()
 	resp.message(body)
