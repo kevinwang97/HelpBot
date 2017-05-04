@@ -32,12 +32,8 @@ def receive_and_respond():
         print parameters
         gmaps = GoogleMaps(os.environ['GOOGLE_MAPS_API_KEY'])
         if parameters['time_modifier'].lower() == 'depart at':
-            if parameters['time'].lower() == 'now':
-                time = datetime.now()
-            else:
-                time = parameters['time']
             directions = gmaps.get_directions(origin=parameters['origin'], destination=parameters['destination'],
-                                              mode=parameters['mode'], departure_time=time)
+                                              mode=parameters['mode'], departure_time=parameters['time'])
         elif parameters['time_modifier'].lower() == 'arrive by':
             directions = gmaps.get_directions(origin=parameters['origin'], destination=parameters['destination'],
                                               mode=parameters['mode'], arrival_time=parameters['time'])
