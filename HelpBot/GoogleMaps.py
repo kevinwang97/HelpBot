@@ -46,6 +46,7 @@ class GoogleMaps():
                 directions_english += get_transit_directions(step)
             else:
                 directions_english += get_default_directions(step)
+            directions_english += '\n'
             instruction_num += 1
 
         return directions_english
