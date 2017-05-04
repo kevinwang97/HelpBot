@@ -41,7 +41,7 @@ class GoogleMaps():
         directions_english = ""
         instruction_num = 1
         for step in directions[0]['legs'][0]['steps']:
-            directions_english += "{}. ".format(str(instruction_num))
+            directions_english += "{}) ".format(str(instruction_num))
             if step['travel_mode'] == 'TRANSIT':
                 directions_english += get_transit_directions(step)
             else:
