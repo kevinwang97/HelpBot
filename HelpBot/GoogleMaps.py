@@ -1,5 +1,4 @@
 import googlemaps
-import os
 import re
 
 
@@ -15,7 +14,7 @@ class GoogleMaps():
                        transit_routing_preference=None, traffic_model=None):
         def get_default_directions(step):
             instruction = re.sub('<[^<]+?>', '', step['html_instructions'])
-            return "{} (distance: {}, duration: {})\n".format(instruction, step['distance']['text'],
+            return "{} (distance: {}, duration: {})".format(instruction, step['distance']['text'],
                                                               step['duration']['text'])
 
         def get_transit_directions(step):
@@ -27,7 +26,7 @@ class GoogleMaps():
             departure_time = step['transit_details']['departure_time']['text']
             arrival_stop = step['transit_details']['arrival_stop']['name']
             arrival_time = step['transit_details']['arrival_time']['text']
-            return "Take {} (headsign: {}) from {} ({}) to {} ({}). There will be {} stops.\n".format(type, headsign,
+            return "Take {} (headsign: {}) from {} ({}) to {} ({}). There will be {} stops.".format(type, headsign,
                                                                                                       departure_stop,
                                                                                                       departure_time,
                                                                                                       arrival_stop,
@@ -42,10 +41,11 @@ class GoogleMaps():
         directions_english = ""
         instruction_num = 1
         for step in directions[0]['legs'][0]['steps']:
+            directions_english += "{}. ".format(str(instruction_num))
             if step['travel_mode'] == 'TRANSIT':
-                directions_english += str(instruction_num) + get_transit_directions(step)
+                directions_english += get_transit_directions(step)
             else:
-                directions_english += str(instruction_num) + get_default_directions(step)
+                directions_english += get_default_directions(step)
             instruction_num += 1
 
-        return "\n".join(directions_english)
+        return directions_english
