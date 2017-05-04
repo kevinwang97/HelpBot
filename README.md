@@ -1,5 +1,5 @@
 # HelpBot
-A messenging bot that allows users without data to use google maps.
+A messenging bot that gives users without cellular data an alternative to apple and google maps (though it uses google maps API).
 ## Virtual Environment
 ```bash
 $ pip install virtualenv
