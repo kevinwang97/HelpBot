@@ -15,8 +15,8 @@ class GoogleMaps():
                        transit_routing_preference=None, traffic_model=None):
         def get_default_directions(step):
             instruction = re.sub('<[^<]+?>', '', step['html_instructions'])
-            return "{} (distance: {}, duration: {})".format(instruction, step['distance']['text'],
-                                                            step['duration']['text'])
+            return "{} (distance: {}, duration: {})\n".format(instruction, step['distance']['text'],
+                                                              step['duration']['text'])
 
         def get_transit_directions(step):
             print step
@@ -27,23 +27,25 @@ class GoogleMaps():
             departure_time = step['transit_details']['departure_time']['text']
             arrival_stop = step['transit_details']['arrival_stop']['name']
             arrival_time = step['transit_details']['arrival_time']['text']
-            return "Take {} (headsign: {}) from {} ({}) to {} ({}). There will be {} stops.".format(type, headsign,
-                                                                                                    departure_stop,
-                                                                                                    departure_time,
-                                                                                                    arrival_stop,
-                                                                                                    arrival_time,
-                                                                                                    num_stops)
+            return "Take {} (headsign: {}) from {} ({}) to {} ({}). There will be {} stops.\n".format(type, headsign,
+                                                                                                      departure_stop,
+                                                                                                      departure_time,
+                                                                                                      arrival_stop,
+                                                                                                      arrival_time,
+                                                                                                      num_stops)
 
         directions = self.google_maps.directions(origin, destination, mode, waypoints, alternatives, avoid,
                                                  language, units, region, departure_time, arrival_time,
                                                  optimize_waypoints,
                                                  transit_mode, transit_routing_preference, traffic_model)
 
-        directions_english = []
+        directions_english = ""
+        instruction_num = 1
         for step in directions[0]['legs'][0]['steps']:
             if step['travel_mode'] == 'TRANSIT':
-                directions_english.append(get_transit_directions(step))
+                directions_english += str(instruction_num) + get_transit_directions(step)
             else:
-                directions_english.append(get_default_directions(step))
+                directions_english += str(instruction_num) + get_default_directions(step)
+            instruction_num += 1
 
         return "\n".join(directions_english)
