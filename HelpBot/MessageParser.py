@@ -15,7 +15,7 @@ class MessageParser:
         regex = "^(\w+) directions from (.+) to (.+) (depart at|arrive by) ([^ ]*)$"
         match_obj = re.match(regex, string)
         time_str = match_obj.group(5)
-        if isinstance(time_str, str) and time_str.lower() == "now":
+        if time_str.lower() == "now":
             time = datetime.now()
         else:
             try:
