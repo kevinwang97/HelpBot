@@ -30,7 +30,7 @@ def receive_and_respond():
     elif 'directions' in request_body:
         parameters = message_parser.parse_directions(request_body)
         print parameters
-        gmaps = GoogleMaps()
+        gmaps = GoogleMaps(app.config['GOOGLE_MAPS_API_KEY'])
         if parameters['time_modifier'].lower() == 'depart at':
             if parameters['time'].lower() == 'now':
                 time = datetime.now()

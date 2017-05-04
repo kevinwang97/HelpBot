@@ -4,8 +4,8 @@ import re
 
 
 class GoogleMaps():
-    def __init__(self):
-        self.api_key = os.getenv('GOOGLE_MAPS_API_KEY', '')
+    def __init__(self, api_key):
+        self.api_key = api_key
         self.google_maps = googlemaps.Client(key=self.api_key)
 
     def get_directions(self, origin, destination,
