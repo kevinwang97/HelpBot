@@ -7,7 +7,7 @@ class BadMessage(Exception):
     pass
 
 
-class MessageParser:
+class MessageParser():
     def __init__(self):
         pass
 
