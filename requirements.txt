@@ -2,3 +2,5 @@ Flask>=0.8
 twilio>=3.3.6
 googlemaps>=2.4.6
 python-dateutil>=2.6.0
+psycopg2>=2.7.1
+pyowm>=2.6.1

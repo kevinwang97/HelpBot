@@ -39,14 +39,12 @@ class GoogleMaps():
                                                  transit_mode, transit_routing_preference, traffic_model)
 
         directions_english = ""
-        instruction_num = 1
-        for step in directions[0]['legs'][0]['steps']:
+        for (instruction_num, step) in enumerate(directions[0]['legs'][0]['steps'], start=1):
             directions_english += "{}) ".format(str(instruction_num))
             if step['travel_mode'] == 'TRANSIT':
                 directions_english += get_transit_directions(step)
             else:
                 directions_english += get_default_directions(step)
             directions_english += '\n'
-            instruction_num += 1
 
         return directions_english

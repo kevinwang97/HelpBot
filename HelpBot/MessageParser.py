@@ -7,7 +7,7 @@ class BadMessage(Exception):
     pass
 
 
-class MessageParser:
+class MessageParser():
     def __init__(self):
         pass
 
@@ -31,4 +31,11 @@ class MessageParser:
                 'time': time
             }
         except:
-            raise BadMessage("Must follow message format")
+            raise BadMessage("Could not parse string into direction format")
+
+    def parse_weather_string(self, string):
+        regex = "weather in (.+)$"
+        match_obj = re.match(regex, string)
+        return {
+            'location': match_obj.group(1)
+        }
